@@ -20,10 +20,11 @@ runs:
   steps:
       - name : Verifing branches
         run: |
-            echo "Env: ${{ github.event.inputs.contains_in_base }}" 
-            echo "Branch: ${{ github.event.inputs.contains_in_compare }}"
+            echo "Env: ${{ inputs.contains_in_base }}" 
+            echo "Branch: ${{ inputs.contains_in_compare }}"
             echo "github_base_ref: ${{ github.base_ref }}"
-            echo "github_event_pull_request_ref: ${{ github.event.pull_request.head.ref }}"
+            echo "github_event_pull_request_ref: ${{ github.event.pull_request.head.ref }}:0:7"
+            echo "github_event_pull_request_ref: ${{ github.event.pull_request.head.ref }}:0:7"
             if [ ${{ github.base_ref }} = "master" ] && [ ${REF_BRANCH:0:7} != "release" ]; then exit 1; fi
         env:
           REF_BRANCH: ${{ github.event.pull_request.head.ref }}
