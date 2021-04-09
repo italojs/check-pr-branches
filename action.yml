@@ -1,0 +1,17 @@
+name: check-pr-branches
+description: A action to check if I my PR branches is allowed.
+author: Italojs
+branding:
+  icon: 'thumbs-up'
+  color: 'white'
+
+
+runs:
+  using: "composite"
+  steps:
+      - name : Verifing branches
+        run: if [ $BASE_BRANCH = "master" ] && [ ${REF_BRANCH:0:7} != "release" ]; then exit 1; fi
+        env:
+          BASE_BRANCH: ${{ github.base_ref }}
+          REF_BRANCH: ${{ github.event.pull_request.head.ref }}
+        shell: bash
