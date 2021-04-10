@@ -22,11 +22,11 @@ runs:
         run: |
             if [[ $BASE_BRANCH =~ $BASE_REGEX ]] && [[ $COMPARE_BRANCH =~ $COMPARE_REGEX ]]
             then 
-              echo merge $BASE_BRANCH into $COMPARE_BRANCH allowed! (ɔ◔‿◔)ɔ ♥
+                echo "Merge $BASE_BRANCH into $COMPARE_BRANCH allowed! (ɔ◔‿◔)ɔ ♥"
             else
-              echo merge $BASE_BRANCH into $COMPARE_BRANCH denied. (ಥ_ಥ)
-              echo Merges into $BASE_BRANCH is only permitted when 'compare' branch match with regex $COMPARE_REGEX! (◐.̃◐)
-              exit 1
+                echo "Merge $BASE_BRANCH into $COMPARE_BRANCH denied. (ಥ_ಥ)
+            Merges into $BASE_BRANCH is only permitted when 'compare' branch match with regex $COMPARE_REGEX! (◐.̃◐)"
+                exit 1
             fi
         env:
           COMPARE_BRANCH: ${{ github.event.pull_request.head.ref }}
