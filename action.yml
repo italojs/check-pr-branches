@@ -29,7 +29,7 @@ runs:
         env:
           COMPARE_BRANCH: ${{ github.event.pull_request.head.ref }}
           BASE_BRANCH: ${{ github.base_ref }}
-          COMPARE_REGEX: ${{ inputs.regex4compare }}
-          BASE_REGEX: ${{ inputs.regex4base }}
+          COMPARE_REGEX: ${{ inputs.allow_only }}
+          BASE_REGEX: ${{ inputs.when_base }}
         shell: bash
       
