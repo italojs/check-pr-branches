@@ -1,32 +1,30 @@
 name: check-pr-branches
-description: A action to check if I my PR branches is allowed.
+description: An action to check if my PR branches is allowed to merge.
 author: Italojs
 branding:
-  icon: 'thumbs-up'
-  color: 'white'
+  icon: 'check-square'
+  color: 'green'
 
 inputs:
-  regex4base:
-    description: 'Define env name'     
+  when_base:
+    description: 'Define base branch name (we accept regex)'     
     required: true
-    default: ''
-  regex4compare:
-    description: 'Define env name'     
+  allow_only:
+    description: 'Define compare branch name (we accept regex)'     
     required: true
-    default: 'prod'
         
 runs:
   using: "composite"
   steps:
-      - name : Verifing branches
+      - name : Checking branches
         run: |
-            if [[ $BASE_BRANCH =~ $BASE_REGEX ]] && [[ $COMPARE_BRANCH =~ $COMPARE_REGEX ]]
+            if [[ $BASE_BRANCH =~ $BASE_REGEX ]] && ! [[ $COMPARE_BRANCH =~ $COMPARE_REGEX ]]
             then 
-                echo "Merge $BASE_BRANCH into $COMPARE_BRANCH allowed! (ɔ◔‿◔)ɔ ♥"
-            else
                 echo "Merge $BASE_BRANCH into $COMPARE_BRANCH denied. (ಥ_ಥ)
-            Merges into $BASE_BRANCH is only permitted when 'compare' branch match with regex $COMPARE_REGEX! (◐.̃◐)"
+                Merges into $BASE_BRANCH is only permitted when 'compare' branch match with regex '$COMPARE_REGEX'! (◐.̃◐)"
                 exit 1
+            else
+                echo "Merge $BASE_BRANCH into $COMPARE_BRANCH allowed! (ɔ◔‿◔)ɔ ♥"
             fi
         env:
           COMPARE_BRANCH: ${{ github.event.pull_request.head.ref }}
