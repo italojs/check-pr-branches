@@ -15,7 +15,7 @@ jobs:
       name: check-pr-branches
       runs-on: ubuntu-latest
       steps:
-        - uses: italojs/check-pr-branches@1.0.0
+        - uses: italojs/check-pr-branches@v1
           with:
               when_base: master
               allow_only: develop
@@ -31,7 +31,7 @@ Example:
 
 only accept to merge into master when the `compare branch` matches with `release\/([0-9]).([0-9]).[0-9]` pattern
 ```yml
-uses: italojs/check-pr-branches@1.0.0
+uses: italojs/check-pr-branches@v1
         with:
             when_base: master
             allow_only: release\/([0-9]).([0-9]).[0-9]
